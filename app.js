@@ -18,14 +18,16 @@ app.use(helmet({
             "default-src": ["'self'"],
             "script-src": ["'self'", "'wasm-unsafe-eval'", "'inline-speculation-rules'", "https://cdnjs.cloudflare.com"],
             "style-src": ["'self'", "'unsafe-inline'", "https://cdnjs.cloudflare.com"],
-            "connect-src": ["'self'"],
+            "connect-src": ["'self'", "ws:", "wss:"],
             "img-src": ["'self'", "data:", "https://*.tile.openstreetmap.org", "https://cdnjs.cloudflare.com"],
             "font-src": ["'self'", "https://cdnjs.cloudflare.com"],
         },
     },
 }));
 
-app.use(express.static(path.join(__dirname, "public")));
+const publicPath = path.join(__dirname, "public");
+
+app.use(express.static(publicPath));
 
 io.on("connection", function(socket){
     deviceCount += 1;
@@ -45,12 +47,12 @@ io.on("connection", function(socket){
     });
 });
 
-app.get("/", function (req, res){
-    res.sendFile(path.join(__dirname, "public", "index.html"));
-});
-
 app.get("/health", function (req, res) {
     res.status(200).json({ status: "ok" });
+});
+
+app.get("*", function (req, res) {
+    res.sendFile(path.join(publicPath, "index.html"));
 });
 
 server.listen(PORT, () => {
