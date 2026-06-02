@@ -146,8 +146,3 @@ Note: Geolocation works best on secure origins. Render provides HTTPS, so browse
 
 By combining these technologies and tools, the Real-time Device Tracker provides a robust solution for monitoring the locations of multiple devices in real-time and displaying them on an interactive map.
 
-## Support
-
-#### If you like this project, show your support & love!
-
-[![buy me a coffee](https://res.cloudinary.com/customzone-app/image/upload/c_pad,w_200/v1712840190/bmc-button_wl78gx.png)](https://www.buymeacoffee.com/akashsunile)
